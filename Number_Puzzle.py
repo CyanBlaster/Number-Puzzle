@@ -18,7 +18,6 @@ def main():
     running = True
     xIdx = 2
     yIdx = 2
-    turn = 1
     board = ZeroField(20)
     while running:
         pygame.display.flip()
@@ -31,7 +30,7 @@ def main():
         for x in range(5):
             for y in range(5):
                 if(array[x][y] != 0):
-                    text_surface, rect = GAME_FONT.render(str(array[x][y]), (0, 0, 0))
+                    text_surface, rect = GAME_FONT.render(str(array[x][y]), (255, 0, 0))
                     screen.blit(text_surface, (y * 100 + 50 - rect.width/2, x * 100 + 50 - rect.height/2))
 
 
@@ -60,15 +59,25 @@ def main():
                     if(yIdx == 5):
                         yIdx = 4
                 elif events.key == pygame.K_SPACE:
-                    if(board[xIdx][yIdx] == 0):
-                        if(turn == 1):
-                            print(1)
-                            board[xIdx][yIdx] = 1
-                            turn = 2
-                        else:
-                            print(2)
-                            board[xIdx][yIdx] = 2
-                            turn = 1
-                    
+                    if (xIdx >= 1 and array[yIdx][xIdx - 1] == 0):
+                        s = array[yIdx][xIdx]
+                        array[yIdx][xIdx] = array[yIdx][xIdx - 1]
+                        array[yIdx][xIdx - 1] = s
+                        print(array[yIdx][xIdx], " ", array[yIdx][xIdx - 1])
+                    elif (xIdx < 4 and array[yIdx][xIdx + 1] == 0):
+                        s = array[yIdx][xIdx]
+                        array[yIdx][xIdx] = array[yIdx][xIdx + 1]
+                        array[yIdx][xIdx + 1] = s
+                        print(array[yIdx][xIdx], " ", array[yIdx][xIdx + 1])
+                    elif (yIdx < 4 and array[yIdx + 1][xIdx] == 0):
+                        s = array[yIdx][xIdx]
+                        array[yIdx][xIdx] = array[yIdx + 1][xIdx]
+                        array[yIdx + 1][xIdx] = s
+                        print(array[yIdx][xIdx], " ", array[yIdx + 1][xIdx])
+                    elif (yIdx >= 1 and array[yIdx - 1][xIdx] == 0):
+                        s = array[yIdx][xIdx]
+                        array[yIdx][xIdx] = array[yIdx - 1][xIdx]
+                        array[yIdx - 1][xIdx] = s
+                        print(array[yIdx][xIdx], " ", array[yIdx - 1][xIdx])
 
 main()
