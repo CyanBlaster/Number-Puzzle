@@ -33,9 +33,9 @@ def main():
                     text_surface, rect = GAME_FONT.render(str(array[x][y]), (255, 0, 0))
                     screen.blit(text_surface, (y * 100 + 50 - rect.width/2, x * 100 + 50 - rect.height/2))
 
-
-
-
+        if (array == [[0, 1, 2, 3, 4], [5, 6, 7, 8, 9], [10, 11, 12, 13, 14], [15, 16, 17, 18, 19], [20, 21, 22, 23, 24]]):
+            print("win")
+            running = False
 
 
         for events in pygame.event.get():
